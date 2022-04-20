@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GalleriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::post('register', [AuthController::class, 'register']);
+
+Route::get('/', [GalleriesController::class, 'index']);
+Route::post('/', [GalleriesController::class, 'store']);
+Route::get('/galleries/{id}', [GalleriesController::class, 'show']);
+Route::delete('/galleries/{id}', [GalleriesController::class, 'destroy']);
+Route::put('/galleries/{id}', [GalleriesController::class, 'update']);
