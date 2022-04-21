@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('galleries', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
+            $table->text('content');
             $table->foreignId('author_id')
                   ->constrained('users')
+                  ->onUpdate('cascade')
+                  ->onDelete('cascade');
+            $table->foreignId('gallery_id')
+                  ->constrained()
                   ->onUpdate('cascade')
                   ->onDelete('cascade');
             $table->timestamps();
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('galleries');
+        Schema::dropIfExists('comments');
     }
 };
